@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TaskFlow – a modern task management app powered by FastAPI." />
+    <title>TaskFlow – Task Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <!-- ── Navbar ─────────────────────────────────────────────────────────── -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <span class="nav-logo" aria-hidden="true">✦</span>
+                <span class="nav-title">TaskFlow</span>
+            </div>
+            <span class="nav-tag" id="task-count-badge">0 tasks</span>
+        </div>
+    </nav>
+
+    <!-- ── Main Layout ────────────────────────────────────────────────────── -->
+    <main class="app-layout">
+
+        <!-- Left Panel: Add / Edit Form -->
+        <aside class="form-panel" aria-label="Task form">
+            <div class="panel-header">
+                <h2 class="panel-title" id="form-heading">Add New Task</h2>
+            </div>
+
+            <form id="task-form" novalidate>
+                <!-- Hidden field holds task ID when editing -->
+                <input type="hidden" id="task-id" value="" />
+
+                <div class="field-group">
+                    <label class="field-label" for="task-title">Title <span class="required">*</span></label>
+                    <input id="task-title" class="field-input" type="text" placeholder="What needs to be done?"
+                        maxlength="255" required autocomplete="off" />
+                    <span class="field-error" id="title-error" role="alert" hidden></span>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="task-description">Description</label>
+                    <textarea id="task-description" class="field-input field-textarea" placeholder="Optional details…"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label class="field-label" for="task-priority">Priority</label>
+                        <select id="task-priority" class="field-input field-select">
+                            <option value="low">🟢 Low</option>
+                            <option value="medium" selected>🟡 Medium</option>
+                            <option value="high">🔴 High</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label" for="task-due-date">Due Date</label>
+                        <input id="task-due-date" class="field-input" type="datetime-local" />
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="submit-btn" class="btn btn-primary">
+                        <span id="submit-label">Create Task</span>
+                    </button>
+                    <button type="button" id="cancel-edit-btn" class="btn btn-ghost hidden">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </aside>
+
+        <!-- Right Panel: Filters + Task List -->
+        <section class="list-panel" aria-label="Task list">
+
+            <!-- Filter Bar -->
+            <div class="filter-bar" role="group" aria-label="Task filters">
+                <div class="filter-group">
+                    <span class="filter-label">Status</span>
+                    <div class="filter-pills" role="radiogroup" aria-label="Filter by status">
+                        <button class="pill active" data-filter-status="all" aria-pressed="true">All</button>
+                        <button class="pill" data-filter-status="todo" aria-pressed="false">To Do</button>
+                        <button class="pill" data-filter-status="in_progress" aria-pressed="false">In Progress</button>
+                        <button class="pill" data-filter-status="done" aria-pressed="false">Done</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label" for="priority-filter">Priority</label>
+                    <select id="priority-filter" class="field-input field-select filter-select">
+                        <option value="all">All priorities</option>
+                        <option value="high">🔴 High</option>
+                        <option value="medium">🟡 Medium</option>
+                        <option value="low">🟢 Low</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-ghost btn-sm" id="refresh-btn" title="Refresh tasks" aria-label="Refresh tasks">
+                    ↺ Refresh
+                </button>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loading-overlay" class="loading-overlay" hidden aria-live="polite" aria-label="Loading tasks">
+                <div class="spinner" aria-hidden="true"></div>
+                <p>Loading tasks…</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state" hidden>
+                <div class="empty-icon" aria-hidden="true">📋</div>
+                <h3>No tasks here</h3>
+                <p>Create your first task using the form on the left.</p>
+            </div>
+
+            <!-- Task Cards -->
+            <ul id="task-list" class="task-list" role="list" aria-label="Tasks"></ul>
+
+        </section>
+    </main>
+
+    <!-- ── Toast Notifications ─────────────────────────────────────────────── -->
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ── Delete Confirm Modal ───────────────────────────────────────────── -->
+    <div id="confirm-modal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-card">
+            <h3 class="modal-title" id="modal-title">Delete Task?</h3>
+            <p class="modal-body">This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn btn-ghost" id="modal-cancel-btn">Cancel</button>
+                <button class="btn btn-danger" id="modal-confirm-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js" type="module"></script>
+</body>
+
+</html>

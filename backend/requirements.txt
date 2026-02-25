@@ -15,6 +15,8 @@ psycopg2-binary==2.9.9    # PostgreSQL driver
 pydantic<2.0
 pydantic-settings<2.0
 
+PyYAML==6.0
+
 # --- Utilities ---
 python-dotenv==1.0.1      # Load .env file into environment
 

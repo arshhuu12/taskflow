@@ -481,18 +481,7 @@ BASE_URL: "https://your-taskflow-api.onrender.com",
 
 ---
 
-## 🖼 Screenshots
 
-> _Replace these placeholders with actual screenshots once the app is running._
-
-| View | Screenshot |
-|---|---|
-| **Task Board** | ![Task Board](screenshots/task-board.png) |
-| **Add Task Form** | ![Add Task](screenshots/add-task.png) |
-| **Filter Bar** | ![Filters](screenshots/filters.png) |
-| **Swagger UI** | ![API Docs](screenshots/swagger.png) |
-
----
 
 ## 🛣 Future Improvements
 
@@ -531,16 +520,6 @@ BASE_URL: "https://your-taskflow-api.onrender.com",
 
 ---
 
-## 👤 Author
-
-**Your Name**  
-Full-Stack Developer
-
-- GitHub: [@your-username](https://github.com/your-username)
-- LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
-- Email: you@example.com
-
----
 
 ## 📄 License
 

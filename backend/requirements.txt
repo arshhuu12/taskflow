@@ -12,8 +12,8 @@ alembic==1.13.1           # Database migrations
 psycopg2-binary==2.9.9    # PostgreSQL driver
 
 # --- Validation & Settings ---
-pydantic==2.7.1           # Data validation (Pydantic v2)
-pydantic-settings==2.2.1  # BaseSettings for env-var loading
+pydantic<2.0
+pydantic-settings<2.0
 
 # --- Utilities ---
 python-dotenv==1.0.1      # Load .env file into environment

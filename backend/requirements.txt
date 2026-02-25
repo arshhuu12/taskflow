@@ -9,7 +9,6 @@ uvicorn==0.23.2
 # Database
 SQLAlchemy==2.0.25
 alembic==1.11.1
-sqlite3-binary==0.0.1   # only if you want SQLite prebuilt
 
 # Pydantic
 pydantic<2.0

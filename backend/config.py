@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     # SQLite for local dev.
     # For Render (PostgreSQL), set DATABASE_URL as an env var, e.g.:
     #   DATABASE_URL=postgresql://user:password@host:5432/taskflow_db
-    DATABASE_URL: str = "postgresql://taskflow_db_k4so_user:63c7ew8rWnDopsBiQsXm7EclQyuQSqdT@dpg-d6g1j7cr85hc73aolqs0-a/taskflow_db_k4so"
+    DATABASE_URL: str = "sqlite:///./taskflow.db"
 
     # ── CORS ──────────────────────────────────────────────────────────────────
     # In production, replace with your frontend origin(s).

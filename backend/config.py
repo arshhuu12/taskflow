@@ -28,7 +28,7 @@ class Settings(BaseSettings):
         "http://localhost:5500",
         "http://127.0.0.1:5500",
         "http://localhost:3000",
-        "https://taskflow-frontend-22la.onrender.com/"
+        "https://taskflow-frontend-22la.onrender.com"
     ]
 
     model_config = SettingsConfigDict(

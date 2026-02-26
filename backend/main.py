@@ -18,11 +18,11 @@ async def lifespan(app: FastAPI):
     # For PostgreSQL (production) – Alembic migrations handle the schema;
     # create_all is skipped to avoid conflicts with the migration history.
     if settings.DATABASE_URL.startswith("sqlite"):
-        Base.metadata.create_all(bind=engine)
-        print(f"✅ SQLite tables created ({settings.DATABASE_URL})")
+       Base.metadata.create_all(bind=engine)
+       print(f"✅ SQLite tables created ({settings.DATABASE_URL})")
     else:
-        print(f"✅ Using PostgreSQL – schema managed by Alembic ({settings.DATABASE_URL.split('@')[-1]})")
-    yield
+       print(f"✅ Using PostgreSQL – initializing schema")
+       Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI(
